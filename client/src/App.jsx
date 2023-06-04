@@ -1,9 +1,11 @@
 import React from "react";
+// * Components
+import Header from "./components/Header/Header";
 
 const App = () => {
   return (
     <div>
-      <h1 className="text-3xl font-bold">Heeey!!</h1>
+      <Header />
     </div>
   );
 };
