@@ -1,7 +1,9 @@
 import React from "react";
+import "boxicons";
 import { Link } from "react-router-dom";
 import { useLogout } from "../../hooks/useLogout";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Dropdown from "../Dropdown/Dropdown";
 
 const Header = () => {
   const { logout } = useLogout();
@@ -40,15 +42,18 @@ const Header = () => {
           {user && (
             <div className="flex text-lg font-bold items-center">
               <li className="mr-5">
-                <p className="text-red">{user.username}</p>
+                <Link to="/" className="text-red">
+                  <box-icon name="heart"></box-icon>
+                </Link>
               </li>
 
-              <button
-                className="border-2 border-sky-400 rounded-md p-2 px-4"
-                onClick={logoutAcc}
-              >
-                Logout
-              </button>
+              <li className="mr-5">
+                <Link to="/" className="text-red">
+                  <box-icon name="cart-alt"></box-icon>
+                </Link>
+              </li>
+
+              <Dropdown user={user} logoutAcc={logoutAcc} />
             </div>
           )}
         </ul>
