@@ -12,7 +12,11 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white fixed w-full p-10 flex items-center justify-between shadow-lg">
+    <header
+      className={`bg-white fixed w-full flex items-center justify-between shadow-lg ${
+        user ? "p-7" : "p-10"
+      }`}
+    >
       <div className="brandLogo">
         <Link to="/" className="font-bold text-xl">
           BookStore 📚
@@ -34,12 +38,17 @@ const Header = () => {
           )}
 
           {user && (
-            <div className="flex text-lg font-bold">
+            <div className="flex text-lg font-bold items-center">
               <li className="mr-5">
                 <p className="text-red">{user.username}</p>
               </li>
 
-              <button onClick={logoutAcc}>Logout</button>
+              <button
+                className="border-2 border-sky-400 rounded-md p-2 px-4"
+                onClick={logoutAcc}
+              >
+                Logout
+              </button>
             </div>
           )}
         </ul>
