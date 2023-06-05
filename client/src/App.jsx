@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import AddProduct from "./pages/admin/addProduct";
 import Main from "./pages/admin/Main";
+import Books from "./pages/admin/Books";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -32,6 +33,7 @@ const App = () => {
         />
 
         <Route path="/admin" element={<Main />} />
+        <Route path="/admin/viewproducts" element={<Books />} />
         <Route path="/admin/addproduct" element={<AddProduct />} />
       </Routes>
     </div>
