@@ -7,8 +7,19 @@ const createToken = (_id) => {
 };
 
 const loginUser = async (req, res) => {
-  res.json({ mssg: "Welcome to login page!!" });
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.login(email, password);
+
+    // * create a token for the user
+    const token = createToken(user._id);
+    res.status(200).json({ email, token });
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
 };
+
 const registerUser = async (req, res) => {
   // * access the values from the user
   const { username, email, password } = req.body;
