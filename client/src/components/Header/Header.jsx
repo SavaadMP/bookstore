@@ -14,7 +14,9 @@ const Header = () => {
   return (
     <header className="bg-white fixed w-full p-10 flex items-center justify-between shadow-lg">
       <div className="brandLogo">
-        <h1 className="font-bold text-xl">BookStore 📚</h1>
+        <Link to="/" className="font-bold text-xl">
+          BookStore 📚
+        </Link>
       </div>
 
       <nav>
