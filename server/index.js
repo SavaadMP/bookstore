@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const userRouter = require("./routes/user");
+const adminRouter = require("./routes/admin");
 
 // * exporess app
 const app = express();
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/api/user", userRouter);
+app.use("/api/admin", adminRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)

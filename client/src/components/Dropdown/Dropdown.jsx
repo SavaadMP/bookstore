@@ -12,7 +12,7 @@ const Dropdown = ({ user, logoutAcc }) => {
     <div className="relative">
       <button
         onClick={toggleDropdown}
-        className="px-4 py-2 bg-gray-800 text-white rounded-md focus:outline-none"
+        className="px-4 py-2 bg-indigo-700 hover:bg-indigo-600 text-white rounded-md focus:outline-none"
       >
         {user.username} 🔽
       </button>

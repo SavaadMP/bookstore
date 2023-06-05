@@ -1,11 +1,14 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
+
 // * Components
 import Header from "./components/Header/Header";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import { useAuthContext } from "./hooks/useAuthContext";
+import AddProduct from "./pages/admin/addProduct";
+import Main from "./pages/admin/Main";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -27,6 +30,9 @@ const App = () => {
           path="/login"
           element={!user ? <Login /> : <Navigate to="/" />}
         />
+
+        <Route path="/admin" element={<Main />} />
+        <Route path="/admin/addproduct" element={<AddProduct />} />
       </Routes>
     </div>
   );
