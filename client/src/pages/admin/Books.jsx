@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import useBooksContext from "../../hooks/useBooksContext";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { Link } from "react-router-dom";
 
 const Books = () => {
   const { books, dispatch } = useBooksContext();
@@ -59,9 +60,12 @@ const Books = () => {
               </div>
 
               <div className="text-right">
-                <button className="mr-5 bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-5 rounded">
+                <Link
+                  to={`/admin/editproduct/${book._id}`}
+                  className="mr-5 bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-5 rounded"
+                >
                   Edit
-                </button>
+                </Link>
                 <button
                   onClick={() => deleteBook(book._id)}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-5 rounded"

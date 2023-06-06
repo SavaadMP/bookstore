@@ -14,6 +14,11 @@ export const authReducer = (state, action) => {
         books: action.payload,
       };
 
+    case "UPDATE_BOOK":
+      return {
+        books: action.payload,
+      };
+
     case "DELETE_BOOK":
       return {
         books: state.books.filter((book) => {

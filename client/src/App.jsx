@@ -11,6 +11,7 @@ import AddProduct from "./pages/admin/addProduct";
 import Main from "./pages/admin/Main";
 import Books from "./pages/admin/Books";
 import Footer from "./components/Footer/Footer";
+import EditProduct from "./pages/admin/EditProduct";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/admin" element={<Main />} />
         <Route path="/admin/viewproducts" element={<Books />} />
         <Route path="/admin/addproduct" element={<AddProduct />} />
+        <Route path="/admin/editproduct/:id" element={<EditProduct />} />
       </Routes>
       <Footer />
     </div>
