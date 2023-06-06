@@ -59,4 +59,18 @@ const deleteBook = async (req, res) => {
   res.status(200).json(book);
 };
 
-module.exports = { getAllBooks, createBook, deleteBook };
+// get a single book through ID
+const getSingleBook = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Book not found!!" });
+  }
+
+  const book = await Book.findById(id);
+  if (!book) return res.status(404).json({ error: "Book not found!!" });
+
+  return res.status(200).json(book);
+};
+
+module.exports = { getAllBooks, createBook, deleteBook, getSingleBook };

@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import AddProduct from "./pages/admin/addProduct";
 import Main from "./pages/admin/Main";
 import Books from "./pages/admin/Books";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/admin/viewproducts" element={<Books />} />
         <Route path="/admin/addproduct" element={<AddProduct />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
