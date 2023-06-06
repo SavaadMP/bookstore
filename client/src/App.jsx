@@ -17,30 +17,52 @@ const App = () => {
   const { user } = useAuthContext();
 
   return (
-    <div>
-      <Header />
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={user ? <Home /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/register"
-          element={!user ? <Register /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/login"
-          element={!user ? <Login /> : <Navigate to="/" />}
-        />
+    <>
+      <div>
+        <Header />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={user ? <Home /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/register"
+            element={!user ? <Register /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
 
-        <Route path="/admin" element={<Main />} />
-        <Route path="/admin/viewproducts" element={<Books />} />
-        <Route path="/admin/addproduct" element={<AddProduct />} />
-        <Route path="/admin/editproduct/:id" element={<EditProduct />} />
-      </Routes>
-      <Footer />
-    </div>
+          {user ? (
+            <>
+              <Route
+                path="/admin"
+                element={user.role == "admin" ? <Main /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/admin/viewproducts"
+                element={user.role == "admin" ? <Books /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/admin/addproduct"
+                element={
+                  user.role == "admin" ? <AddProduct /> : <Navigate to="/" />
+                }
+              />
+              <Route
+                path="/admin/editproduct/:id"
+                element={
+                  user.role == "admin" ? <EditProduct /> : <Navigate to="/" />
+                }
+              />
+            </>
+          ) : null}
+        </Routes>
+        <Footer />
+      </div>
+    </>
   );
 };
 

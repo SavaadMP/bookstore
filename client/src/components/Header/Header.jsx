@@ -20,8 +20,10 @@ const Header = () => {
       }`}
     >
       <div className="brandLogo">
-        <Link to="/" className="font-bold text-xl">
-          BookStore 📚
+        <Link to="/admin" className="font-bold text-xl">
+          {user && user.role === "admin"
+            ? "BookStore Admin 📚"
+            : "BookStore 📚"}
         </Link>
       </div>
 
@@ -41,17 +43,27 @@ const Header = () => {
 
           {user && (
             <div className="flex text-lg font-bold items-center">
-              <li className="mr-5">
-                <Link to="/" className="text-red">
-                  <box-icon name="heart"></box-icon>
-                </Link>
-              </li>
+              {user.role === "admin" ? (
+                <li className="mr-5">
+                  <Link to="/" className="text-red-600">
+                    Home 🏠
+                  </Link>
+                </li>
+              ) : (
+                <>
+                  <li className="mr-5">
+                    <Link to="/">
+                      <box-icon name="cart-alt"></box-icon>
+                    </Link>
+                  </li>
 
-              <li className="mr-5">
-                <Link to="/" className="text-red">
-                  <box-icon name="cart-alt"></box-icon>
-                </Link>
-              </li>
+                  <li className="mr-5">
+                    <Link to="/">
+                      <box-icon name="heart"></box-icon>
+                    </Link>
+                  </li>
+                </>
+              )}
 
               <Dropdown user={user} logoutAcc={logoutAcc} />
             </div>

@@ -25,7 +25,7 @@ const Dropdown = ({ user, logoutAcc }) => {
                 onClick={logoutAcc}
                 className="block px-4 py-2 hover:bg-gray-200"
               >
-                Log Out
+                Log Out ➡️
               </Link>
             </li>
 
@@ -33,7 +33,7 @@ const Dropdown = ({ user, logoutAcc }) => {
               onClick={toggleDropdown}
               className="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
             >
-              Close
+              Close ❎
             </li>
           </ul>
         </div>

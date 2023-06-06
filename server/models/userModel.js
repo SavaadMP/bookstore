@@ -17,6 +17,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+  },
 });
 
 // * Static signup method
@@ -39,8 +43,24 @@ userSchema.statics.signup = async function (username, email, password) {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
+  if (email === "admin@gmail.com" && password === "Admin@Bookstore2023") {
+    const user = await this.create({
+      username,
+      email,
+      password: hashedPassword,
+      role: "admin",
+    });
+
+    return user;
+  }
+
   //   * adding the user to database
-  const user = await this.create({ username, email, password: hashedPassword });
+  const user = await this.create({
+    username,
+    email,
+    password: hashedPassword,
+    role: "user",
+  });
   return user;
 };
 
