@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import useBooksContext from "../../hooks/useBooksContext";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Books = () => {
   const { books, dispatch } = useBooksContext();
   const [filteredBooks, setFilteredBooks] = useState([]);
+
+  const navigate = useNavigate();
 
   const deleteBook = async (id) => {
     const response = await fetch(
@@ -22,6 +24,8 @@ const Books = () => {
         type: "DELETE_BOOK",
         payload: json,
       });
+
+      navigate("/admin");
     }
   };
 
