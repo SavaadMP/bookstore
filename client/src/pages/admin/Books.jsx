@@ -5,6 +5,24 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 const Books = () => {
   const { books, dispatch } = useBooksContext();
 
+  const deleteBook = async (id) => {
+    const response = await fetch(
+      "http://localhost:2200/api/admin/deletebook/" + id,
+      {
+        method: "DELETE",
+      }
+    );
+
+    const json = await response.json();
+
+    if (response.ok) {
+      dispatch({
+        type: "DELETE_BOOK",
+        payload: json,
+      });
+    }
+  };
+
   useEffect(() => {
     const fetchBooks = async () => {
       const response = await fetch("http://localhost:2200/api/admin/books");
@@ -44,7 +62,10 @@ const Books = () => {
                 <button className="mr-5 bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-5 rounded">
                   Edit
                 </button>
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-5 rounded">
+                <button
+                  onClick={() => deleteBook(book._id)}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-5 rounded"
+                >
                   Delete
                 </button>
               </div>

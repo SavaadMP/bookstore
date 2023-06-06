@@ -10,10 +10,15 @@ export const authReducer = (state, action) => {
       };
 
     case "CREATE_BOOK":
-      console.log(state, action.payload);
-      console.log(state.books);
       return {
         books: action.payload,
+      };
+
+    case "DELETE_BOOK":
+      return {
+        books: state.books.filter((book) => {
+          return book._id !== action.payload._id;
+        }),
       };
 
     default:

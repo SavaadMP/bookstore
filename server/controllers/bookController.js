@@ -1,9 +1,11 @@
+const { default: mongoose } = require("mongoose");
 const Book = require("../models/bookModel");
 
 const getAllBooks = async (req, res) => {
   const allBooks = await Book.find({}).sort({ createdAt: -1 });
   res.status(200).json(allBooks);
 };
+
 const createBook = async (req, res) => {
   const { title, description, price, author, imageURL } = req.body;
 
@@ -42,4 +44,19 @@ const createBook = async (req, res) => {
   }
 };
 
-module.exports = { getAllBooks, createBook };
+const deleteBook = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Book not found!!" });
+  }
+
+  const book = await Book.findOneAndDelete({ _id: id });
+  if (!book) {
+    return res.status(404).json({ error: "Book not found!!" });
+  }
+
+  res.status(200).json(book);
+};
+
+module.exports = { getAllBooks, createBook, deleteBook };
