@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useBooksContext from "../../hooks/useBooksContext";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 
 const Books = () => {
   const { books, dispatch } = useBooksContext();
+  const [filteredBooks, setFilteredBooks] = useState([]);
 
   const deleteBook = async (id) => {
     const response = await fetch(
@@ -37,12 +38,20 @@ const Books = () => {
     fetchBooks();
   }, [dispatch]);
 
+  const searchHandle = (value) => {
+    const response = books.filter((book) =>
+      book.title.toLowerCase().includes(value.toLowerCase())
+    );
+    console.log(value);
+    setFilteredBooks(response);
+  };
+
   return (
     <div className="p-40">
-      <SearchBar text="Search Books.." />
+      <SearchBar text="Search Books.." searchHandle={searchHandle} />
 
       {books && books.length ? (
-        books.map((book) => {
+        filteredBooks.map((book) => {
           return (
             <div
               key={book._id}
