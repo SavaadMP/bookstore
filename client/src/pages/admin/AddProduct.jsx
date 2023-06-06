@@ -83,7 +83,7 @@ const AddProduct = () => {
               <input
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                type="text"
+                type="number"
                 className={`appearance-none ${
                   emptyFields.includes("price")
                     ? "border-red-600 border-2 text-red placeholder-red-500"
