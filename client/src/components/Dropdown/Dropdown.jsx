@@ -29,14 +29,11 @@ const Dropdown = ({ user, logoutAcc }) => {
               </Link>
             </li>
 
-            <li>
-              <Link
-                to="/"
-                onClick={toggleDropdown}
-                className="block px-4 py-2 hover:bg-gray-200"
-              >
-                Close
-              </Link>
+            <li
+              onClick={toggleDropdown}
+              className="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
+            >
+              Close
             </li>
           </ul>
         </div>

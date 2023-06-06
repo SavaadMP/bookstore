@@ -10,6 +10,7 @@ const AddProduct = () => {
   const [author, setAuthor] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const navigate = useNavigate();
 
@@ -29,6 +30,7 @@ const AddProduct = () => {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields);
     }
 
     if (response.ok) {
@@ -38,6 +40,7 @@ const AddProduct = () => {
       setAuthor("");
       setImageURL("");
       setError(null);
+      setEmptyFields([]);
 
       dispatch({ type: "CREATE_BOOK", payload: json });
       navigate("/admin");
@@ -59,7 +62,11 @@ const AddProduct = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 type="text"
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-4"
+                className={`appearance-none ${
+                  emptyFields.includes("title")
+                    ? "border-red-600 border-2 text-red placeholder-red-500"
+                    : "border-gray-400"
+                } rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-4`}
                 placeholder="Name of the book"
               />
             </div>
@@ -77,7 +84,11 @@ const AddProduct = () => {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 type="text"
-                className="appearance-none mb-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className={`appearance-none ${
+                  emptyFields.includes("price")
+                    ? "border-red-600 border-2 text-red placeholder-red-500"
+                    : "border-gray-400"
+                } rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-4`}
                 placeholder="Price"
               />
             </div>
@@ -86,7 +97,11 @@ const AddProduct = () => {
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
                 type="text"
-                className="appearance-none mb-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className={`appearance-none ${
+                  emptyFields.includes("author")
+                    ? "border-red-600 border-2 text-red placeholder-red-500"
+                    : "border-gray-400"
+                } rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-4`}
                 placeholder="author"
               />
             </div>
@@ -95,7 +110,11 @@ const AddProduct = () => {
                 value={imageURL}
                 onChange={(e) => setImageURL(e.target.value)}
                 type="text"
-                className="appearance-none mb-4 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className={`appearance-none ${
+                  emptyFields.includes("imageURL")
+                    ? "border-red-600 border-2 text-red placeholder-red-500"
+                    : "border-gray-400"
+                } rounded-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-4`}
                 placeholder="Image URL"
               />
             </div>
