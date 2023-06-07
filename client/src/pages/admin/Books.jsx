@@ -54,7 +54,7 @@ const Books = () => {
     };
 
     fetchBooks();
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   const searchHandle = (value) => {
     const response = books.filter((book) =>

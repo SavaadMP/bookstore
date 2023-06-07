@@ -20,7 +20,7 @@ const BookCard = ({ book }) => {
           >
             <img className="w-60 h-80" src={book.imageURL} alt={book.title} />
           </div>
-          <AddToCart />
+          <AddToCart bookID={book._id} />
         </div>
       </div>
     </>

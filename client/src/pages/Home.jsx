@@ -3,6 +3,7 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import BookCard from "./BookCard";
 import useBooksContext from "../hooks/useBooksContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Loader from "../components/Loader/Loader";
 
 const Home = () => {
   const { books, dispatch } = useBooksContext();
@@ -33,7 +34,6 @@ const Home = () => {
     const response = books.filter((book) =>
       book.title.toLowerCase().includes(value.toLowerCase())
     );
-    console.log(value);
     setFilteredBooks(response);
   };
 
@@ -52,12 +52,14 @@ const Home = () => {
                   <BookCard key={book._id} book={book} />
                 ))
               ) : (
-                <p>Books Not Found!!</p>
+                <Loader />
               )}
             </div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <Loader />
+      )}
     </>
   );
 };

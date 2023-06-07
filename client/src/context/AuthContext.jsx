@@ -1,4 +1,5 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
+import Loader from "../components/Loader/Loader";
 
 export const AuthContext = createContext();
 
@@ -24,13 +25,20 @@ export const AuthContextProvider = ({ children }) => {
     user: null,
   });
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user) {
       dispatch({ type: "LOGIN_USER", payload: user });
     }
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

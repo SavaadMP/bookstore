@@ -52,7 +52,7 @@ const Header = () => {
               ) : (
                 <>
                   <li className="mr-5">
-                    <Link to="/">
+                    <Link to="/cart">
                       <box-icon name="cart-alt"></box-icon>
                     </Link>
                   </li>
