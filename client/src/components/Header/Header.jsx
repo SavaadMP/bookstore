@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <header
-      className={`bg-white fixed w-full flex items-center justify-between shadow-lg ${
+      className={`bg-white fixed w-full flex items-center justify-between shadow-lg z-40 ${
         user ? "p-7" : "p-10"
       }`}
     >

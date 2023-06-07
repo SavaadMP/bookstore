@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar/SearchBar";
 import BookCard from "./BookCard";
 import useBooksContext from "../hooks/useBooksContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Home = () => {
   const { books, dispatch } = useBooksContext();
+  const { user } = useAuthContext();
   const [filteredBooks, setFilteredBooks] = useState([]);
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await fetch("http://localhost:2200/api/admin/books");
+      const response = await fetch("http://localhost:2200/api/admin/books", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       const json = await response.json();
 
       if (response.ok) {
@@ -18,8 +24,10 @@ const Home = () => {
       }
     };
 
-    fetchBooks();
-  }, [dispatch]);
+    if (user) {
+      fetchBooks();
+    }
+  }, [dispatch, user]);
 
   const searchHandle = (value) => {
     const response = books.filter((book) =>

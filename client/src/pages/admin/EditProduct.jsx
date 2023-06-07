@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useBooksContext from "../../hooks/useBooksContext";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const EditProduct = () => {
+  const { user } = useAuthContext();
   const { id } = useParams();
   const { dispatch } = useBooksContext();
   const [title, setTitle] = useState("");
@@ -18,7 +20,12 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       const response = await fetch(
-        "http://localhost:2200/api/admin/book/" + id
+        "http://localhost:2200/api/admin/book/" + id,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
       );
       const json = await response.json();
 
@@ -35,6 +42,11 @@ const EditProduct = () => {
   const updateBook = async (e) => {
     e.preventDefault();
 
+    if (!user) {
+      setError("You must be logged in!!");
+      return;
+    }
+
     const book = { title, description, price, author, imageURL };
     const response = await fetch(
       "http://localhost:2200/api/admin/editbook/" + id,
@@ -42,6 +54,7 @@ const EditProduct = () => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(book),
       }
@@ -55,7 +68,7 @@ const EditProduct = () => {
 
     if (response.ok) {
       dispatch({ type: "UPDATE_BOOK", payload: json });
-      navigate("/admin");
+      navigate("/admin/viewproducts");
     }
   };
 

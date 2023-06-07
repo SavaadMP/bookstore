@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useBooksContext from "../../hooks/useBooksContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const AddProduct = () => {
+  const { user } = useAuthContext();
   const { dispatch } = useBooksContext();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -17,11 +19,17 @@ const AddProduct = () => {
   const addNewBook = async (event) => {
     event.preventDefault();
 
+    if (!user) {
+      setError("You must be logged in!!");
+      return;
+    }
+
     const book = { title, description, price, author, imageURL };
     const response = await fetch("http://localhost:2200/api/admin/addBook", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
       body: JSON.stringify(book),
     });

@@ -2,18 +2,27 @@ import React, { useEffect, useState } from "react";
 import useBooksContext from "../../hooks/useBooksContext";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Books = () => {
   const { books, dispatch } = useBooksContext();
+  const { user } = useAuthContext();
   const [filteredBooks, setFilteredBooks] = useState([]);
 
   const navigate = useNavigate();
 
   const deleteBook = async (id) => {
+    if (!user) {
+      return;
+    }
+
     const response = await fetch(
       "http://localhost:2200/api/admin/deletebook/" + id,
       {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       }
     );
 
@@ -25,13 +34,17 @@ const Books = () => {
         payload: json,
       });
 
-      navigate("/admin");
+      navigate("/admin/");
     }
   };
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await fetch("http://localhost:2200/api/admin/books");
+      const response = await fetch("http://localhost:2200/api/admin/books", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       const json = await response.json();
 
       if (response.ok) {
@@ -74,6 +87,7 @@ const Books = () => {
                     <div className="ml-4">
                       <h3 className="text-red-900 font-bold">{book.title}</h3>
                       <p className="text-gray-700">{book.author}</p>
+                      <p className="text-gray-900">₹{book.price}</p>
                       <p className="text-gray-500">{book.description}</p>
                     </div>
                   </div>

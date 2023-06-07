@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Popup = ({ showPopUp, book_id }) => {
+  const { user } = useAuthContext();
   const [book, setBook] = useState([]);
 
   useEffect(() => {
     const fetchBooks = async () => {
       const response = await fetch(
-        "http://localhost:2200/api/admin/book/" + book_id
+        "http://localhost:2200/api/admin/book/" + book_id,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
       );
       const json = await response.json();
       setBook(json);
@@ -16,7 +23,7 @@ const Popup = ({ showPopUp, book_id }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75">
+    <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75">
       <div
         className="relative bg-white rounded-lg p-8 "
         style={{ width: "600px" }}

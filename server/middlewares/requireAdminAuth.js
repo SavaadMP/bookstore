@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
-const requireAuth = async (req, res, next) => {
+const requireAdminAuth = async (req, res, next) => {
   // * Verify Authentication
   const { authorization } = req.headers;
 
@@ -12,13 +12,17 @@ const requireAuth = async (req, res, next) => {
 
   try {
     const { _id } = jwt.verify(token, process.env.SECRET_KEY);
-    req.user = await User.findOne({ _id }).select("_id");
+    req.user = await User.findOne({ _id }).select("role");
+    console.log(req.user.role);
 
-    next();
+    if (req.user.role === "user") res.status(401).json({ error: "Admin Only" });
+    else {
+      next();
+    }
   } catch (error) {
     console.log(error);
     res.status(400).json({ error: "Request is not authorized!!" });
   }
 };
 
-module.exports = requireAuth;
+module.exports = requireAdminAuth;
