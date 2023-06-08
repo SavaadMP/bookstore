@@ -48,4 +48,9 @@ const addToCart = async (req, res) => {
   }
 };
 
-module.exports = { addToCart };
+const getCartItems = async (req, res) => {
+  const resp = await User.find({ _id: req.user._id });
+  res.json(resp[0].cart);
+};
+
+module.exports = { addToCart, getCartItems };

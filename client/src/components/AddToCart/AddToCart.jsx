@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useCartContext } from "../../hooks/useCartContext";
 
 const AddToCart = ({ bookID }) => {
   const { user } = useAuthContext();
+  const { dispatch } = useCartContext();
 
   const addToCart = async (bookId) => {
     if (!user) {
@@ -22,7 +24,10 @@ const AddToCart = ({ bookID }) => {
     );
 
     const json = await response.json();
-    console.log(json);
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: json,
+    });
   };
 
   return (
