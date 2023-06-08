@@ -3,6 +3,7 @@ import EmptyCart from "../components/EmptyCart/EmptyCart";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useCartContext } from "../hooks/useCartContext";
 import Loader from "../components/Loader/Loader";
+import CartItem from "../components/CartItem/CartItem";
 
 const Cart = () => {
   const { user } = useAuthContext();
@@ -34,12 +35,8 @@ const Cart = () => {
       ) : (
         <div className="p-40">
           {cartItems &&
-            cartItems.map((item) => {
-              return (
-                <div key={item.productId}>
-                  <p>{item.quantity}</p>
-                </div>
-              );
+            cartItems.map((book) => {
+              return <CartItem key={book.productId} bookID={book.productId} />;
             })}
         </div>
       )}
