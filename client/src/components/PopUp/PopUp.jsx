@@ -22,6 +22,23 @@ const Popup = ({ showPopUp, book_id }) => {
     fetchBooks();
   }, []);
 
+  const addToCart = async (value) => {
+    if (!user) return alert("You should login first!!");
+
+    const response = await fetch(
+      "http://localhost:2200/api/user/addtocart/" + value,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    const json = await response.json();
+    console.log(json);
+  };
+
   return (
     <div className="fixed z-50 inset-0 flex items-center justify-center bg-gray-900 bg-opacity-75">
       <div
@@ -61,7 +78,10 @@ const Popup = ({ showPopUp, book_id }) => {
             <p className="text-lg font-bold mb-4">₹{book.price}</p>
             <p className="text-gray-600 mb-4">By {book.author}</p>
             <div className="flex justify-between">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <button
+                onClick={() => addToCart(book._id)}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
                 Add to Cart
               </button>
               <button className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded">
