@@ -12,7 +12,6 @@ import Main from "./pages/admin/Main";
 import Books from "./pages/admin/Books";
 import Footer from "./components/Footer/Footer";
 import EditProduct from "./pages/admin/EditProduct";
-import Cart from "./pages/Cart";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -35,7 +34,6 @@ const App = () => {
             path="/login"
             element={!user ? <Login /> : <Navigate to="/" />}
           />
-          <Route path="/cart" element={user ? <Cart /> : <Navigate to="/" />} />
 
           {user ? (
             <>

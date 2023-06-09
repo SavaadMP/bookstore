@@ -21,9 +21,6 @@ const userSchema = new Schema({
     type: String,
     enum: ["user", "admin"],
   },
-  cart: {
-    type: Array,
-  },
 });
 
 // * Static signup method

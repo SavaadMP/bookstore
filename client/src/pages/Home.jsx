@@ -4,13 +4,11 @@ import BookCard from "./BookCard";
 import useBooksContext from "../hooks/useBooksContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Loader from "../components/Loader/Loader";
-import { useCartContext } from "../hooks/useCartContext";
 
 const Home = () => {
   const { books, dispatch } = useBooksContext();
   const { user } = useAuthContext();
   const [filteredBooks, setFilteredBooks] = useState([]);
-  const { dispatch: setCartItems } = useCartContext();
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -27,22 +25,8 @@ const Home = () => {
       }
     };
 
-    const fetchCartItems = async () => {
-      if (!user) return;
-
-      const response = await fetch("http://localhost:2200/api/user/cart", {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
-
-      const json = await response.json();
-      setCartItems({ type: "GET_CART_ITEMS", payload: json });
-    };
-
     if (user) {
       fetchBooks();
-      fetchCartItems();
     }
   }, [dispatch, user]);
 
