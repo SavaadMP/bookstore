@@ -37,21 +37,19 @@ const Cart = () => {
                       {/* Product image */}
                       <div className="aspect-w-3 aspect-h-2 mb-4">
                         <img
-                          src={book.CartItems[0].imageURL}
-                          alt={book.CartItems[0].title}
+                          src={book.CartItems.imageURL}
+                          alt={book.CartItems.title}
                           className="object-cover object-center rounded w-60 h-80"
                         />
                       </div>
                       {/* Product details */}
                       <div className="flex flex-col">
                         <h2 className="text-xl font-bold">
-                          {book.CartItems[0].title}
+                          {book.CartItems.title}
                         </h2>
-                        <p className="text-gray-600">
-                          {book.CartItems[0].author}
-                        </p>
+                        <p className="text-gray-600">{book.CartItems.author}</p>
                         <p className="text-gray-600 mt-2">
-                          ${book.CartItems[0].price}
+                          ${book.CartItems.price}
                         </p>
                         {/* Quantity and Remove buttons */}
                         <div className="flex items-center mt-4">

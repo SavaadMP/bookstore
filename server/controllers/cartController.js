@@ -76,6 +76,15 @@ const displayCart = async (req, res) => {
         as: "CartItems",
       },
     },
+    {
+      $project: {
+        item: 1,
+        quantity: 1,
+        CartItems: {
+          $arrayElemAt: ["$CartItems", 0],
+        },
+      },
+    },
   ]).exec();
 
   return res.status(200).json(cart);
