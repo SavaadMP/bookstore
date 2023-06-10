@@ -15,9 +15,12 @@ const requireAdminAuth = require("../middlewares/requireAdminAuth");
 router.use(requireAuth);
 
 router.get("/books", getAllBooks);
-router.post("/addbook", requireAdminAuth, createBook);
-router.delete("/deletebook/:id", requireAdminAuth, deleteBook);
 router.get("/book/:id", getSingleBook);
+
+router.post("/addbook", requireAdminAuth, createBook);
+
+router.delete("/deletebook/:id", requireAdminAuth, deleteBook);
+
 router.patch("/editbook/:id", updateSingleBook);
 
 module.exports = router;

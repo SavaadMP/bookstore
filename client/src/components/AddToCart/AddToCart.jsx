@@ -18,8 +18,7 @@ const AddToCart = ({ bookID }) => {
       }
     );
 
-    const json = await response.json();
-    console.log(json);
+    await response.json();
   };
 
   return (

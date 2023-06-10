@@ -4,14 +4,13 @@ const Schema = mongoose.Schema;
 const cartSchema = new Schema(
   {
     userId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: true,
     },
 
     cartProducts: {
       type: Array,
       required: true,
-      default: [],
     },
   },
   { timestamps: true }

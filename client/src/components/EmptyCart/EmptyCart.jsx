@@ -29,7 +29,7 @@ const EmptyCart = () => {
       </p>
       <Link
         to="/"
-        className="bg-indigo-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-4"
+        className="bg-indigo-900 tracking-wider hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mt-4"
       >
         Browse Books
       </Link>

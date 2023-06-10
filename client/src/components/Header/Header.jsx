@@ -1,84 +1,4 @@
-// import React from "react";
-// import "boxicons";
-// import { Link } from "react-router-dom";
-// import { useLogout } from "../../hooks/useLogout";
-// import { useAuthContext } from "../../hooks/useAuthContext";
-// import Dropdown from "../Dropdown/Dropdown";
-
-// const Header = () => {
-//   const { logout } = useLogout();
-//   const { user } = useAuthContext();
-
-//   const logoutAcc = () => {
-//     logout();
-//   };
-
-//   return (
-//     <>
-//       <header
-//         className={`bg-white fixed w-full flex items-center justify-between shadow-lg z-40 ${
-//           user ? "p-7" : "p-10"
-//         }`}
-//       >
-//         <div className="brandLogo">
-//           <Link to="/admin" className="font-bold text-xl">
-//             {user && user.role === "admin"
-//               ? "BookStore Admin 📚"
-//               : "BookStore 📚"}
-//           </Link>
-//         </div>
-
-//         <nav>
-//           <ul className="flex text-lg font-bold">
-//             {!user && (
-//               <div className="flex text-lg font-bold">
-//                 <li className="mr-5">
-//                   <Link to="/login">Login</Link>
-//                 </li>
-
-//                 <li className="mr-5">
-//                   <Link to="/register">Register</Link>
-//                 </li>
-//               </div>
-//             )}
-
-//             {user && (
-//               <div className="flex text-lg font-bold items-center">
-//                 {user.role === "admin" ? (
-//                   <li className="mr-5">
-//                     <Link to="/" className="text-red-600">
-//                       Home 🏠
-//                     </Link>
-//                   </li>
-//                 ) : (
-//                   <>
-//                     <li className="mr-5">
-//                       <Link to="/">
-//                         <box-icon name="cart-alt"></box-icon>
-//                       </Link>
-//                     </li>
-
-//                     <li className="mr-5">
-//                       <Link to="/">
-//                         <box-icon name="heart"></box-icon>
-//                       </Link>
-//                     </li>
-//                   </>
-//                 )}
-
-//                 <Dropdown user={user} logoutAcc={logoutAcc} />
-//               </div>
-//             )}
-//           </ul>
-//         </nav>
-//       </header>
-//     </>
-//   );
-// };
-
-// export default Header;
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "../Dropdown/Dropdown";
 import { useLogout } from "../../hooks/useLogout";
@@ -88,17 +8,35 @@ const Header = () => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   const logoutAcc = () => {
     logout();
   };
+
+  const fetchCartCount = async () => {
+    if (!user) return;
+
+    const response = await fetch("http://localhost:2200/api/user/cartCount", {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+
+    const json = await response.json();
+    setCartCount(json);
+  };
+
+  if (user) {
+    fetchCartCount();
+  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <nav className="bg-white fixed w-full p-4">
+    <nav className="bg-white fixed w-full p-4 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -137,10 +75,13 @@ const Header = () => {
                         </Link>
 
                         <Link
-                          to="/"
+                          to="/cart"
                           className="text-black hover:text-indigo-700  px-3 py-2 rounded-md text-lg font-medium"
                         >
-                          Cart 🛒
+                          Cart{" "}
+                          <span className="px-1 rounded-full py-0 bg-indigo-800 text-white text-base">
+                            {cartCount}
+                          </span>
                         </Link>
 
                         <Link

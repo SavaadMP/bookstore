@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 
@@ -12,6 +12,7 @@ import Main from "./pages/admin/Main";
 import Books from "./pages/admin/Books";
 import Footer from "./components/Footer/Footer";
 import EditProduct from "./pages/admin/EditProduct";
+import Cart from "./pages/Cart";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -25,6 +26,11 @@ const App = () => {
             exact
             path="/"
             element={user ? <Home /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/cart"
+            element={user ? <Cart /> : <Navigate to="/login" />}
           />
           <Route
             path="/register"

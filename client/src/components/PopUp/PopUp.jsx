@@ -35,8 +35,7 @@ const Popup = ({ showPopUp, book_id }) => {
       }
     );
 
-    const json = await response.json();
-    console.log(json);
+    await response.json();
   };
 
   return (
