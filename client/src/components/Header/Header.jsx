@@ -178,7 +178,7 @@ const Header = () => {
               </Link>
 
               <Link
-                to="/"
+                to="/cart"
                 className="text-black hover:text-indigo-700  px-3 py-2 rounded-md text-lg font-medium"
               >
                 Cart 🛒

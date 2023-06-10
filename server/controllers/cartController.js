@@ -1,5 +1,6 @@
 const { default: mongoose } = require("mongoose");
 const Cart = require("../models/cartModel");
+const { response } = require("express");
 
 const addToCart = async (req, res) => {
   // * Getting product id..
@@ -102,8 +103,41 @@ const getCartCount = async (req, res) => {
   return res.status(200).json(count);
 };
 
+const changeQuantity = async (req, res) => {
+  const { productID, count } = req.body;
+
+  let updatedCart = await Cart.findOneAndUpdate(
+    {
+      userId: req.user._id,
+      "cartProducts.item": new mongoose.Types.ObjectId(productID),
+    },
+    {
+      $inc: { "cartProducts.$.quantity": count },
+    }
+  );
+
+  res.status(200).json(updatedCart);
+};
+
+const deleteCartItem = async (req, res) => {
+  const { id } = req.params;
+
+  const deletedCart = await Cart.findOneAndUpdate(
+    { userId: req.user._id },
+    {
+      $pull: {
+        cartProducts: { item: new mongoose.Types.ObjectId(id) },
+      },
+    }
+  );
+
+  res.json(deletedCart);
+};
+
 module.exports = {
   addToCart,
   displayCart,
   getCartCount,
+  changeQuantity,
+  deleteCartItem,
 };
