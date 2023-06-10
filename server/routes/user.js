@@ -8,12 +8,14 @@ const {
   getCartCount,
   changeQuantity,
   deleteCartItem,
+  getCartPrice,
 } = require("../controllers/cartController");
 
 const requireAuth = require("../middlewares/requireAuth");
 
 router.get("/cart", requireAuth, displayCart);
 router.get("/cartCount", requireAuth, getCartCount);
+router.get("/getCartPrice", requireAuth, getCartPrice);
 
 router.post("/login", loginUser);
 router.post("/register", registerUser);

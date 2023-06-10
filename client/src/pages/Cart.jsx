@@ -5,6 +5,7 @@ import CartItem from "../components/CartItem/CartItem";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [cartPrice, setCartPrice] = useState(0);
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -19,8 +20,23 @@ const Cart = () => {
       setCartItems([json][0]);
     };
 
+    const getCartPrice = async () => {
+      const response = await fetch(
+        "http://localhost:2200/api/user/getCartPrice",
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+
+      const json = await response.json();
+      setCartPrice(json.total);
+    };
+
     if (user) {
       fetchCartItems();
+      getCartPrice();
     }
   }, [cartItems]);
 
@@ -47,7 +63,9 @@ const Cart = () => {
                 <div className="bg-white rounded-md p-4 px-6 shadow ">
                   <div className="flex items-start justify-around">
                     <p className="text-gray-600 mr-5">Total:</p>
-                    <p className="font-semibold text-orange-600">₹1599.00</p>
+                    <p className="font-semibold text-orange-600">
+                      ₹{cartPrice}
+                    </p>
                   </div>
                 </div>
               </div>

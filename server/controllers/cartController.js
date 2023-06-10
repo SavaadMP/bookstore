@@ -134,10 +134,56 @@ const deleteCartItem = async (req, res) => {
   res.json(deletedCart);
 };
 
+const getCartPrice = async (req, res) => {
+  let totalPrice = await Cart.aggregate([
+    {
+      $match: { userId: req.user._id },
+    },
+    {
+      $unwind: "$cartProducts",
+    },
+    {
+      $project: {
+        item: "$cartProducts.item",
+        quantity: "$cartProducts.quantity",
+      },
+    },
+    {
+      $lookup: {
+        from: "books",
+        localField: "item",
+        foreignField: "_id",
+        as: "CartItems",
+      },
+    },
+    {
+      $project: {
+        item: 1,
+        quantity: 1,
+        CartItems: {
+          $arrayElemAt: ["$CartItems", 0],
+        },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        total: {
+          $sum: {
+            $multiply: ["$quantity", "$CartItems.price"],
+          },
+        },
+      },
+    },
+  ]).exec();
+
+  return res.status(200).json(totalPrice[0]);
+};
 module.exports = {
   addToCart,
   displayCart,
   getCartCount,
   changeQuantity,
   deleteCartItem,
+  getCartPrice,
 };
