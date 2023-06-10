@@ -23,6 +23,7 @@ const addToCart = async (req, res) => {
     if (isProductExists != -1) {
       let updatedCart = await Cart.findOneAndUpdate(
         {
+          userId: req.user._id,
           "cartProducts.item": new mongoose.Types.ObjectId(id),
         },
         {
