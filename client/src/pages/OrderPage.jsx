@@ -196,6 +196,7 @@ const OrderPage = () => {
         </div>
         <div className="flex items-center">
           <input
+            disabled={true}
             type="radio"
             id="online-payment"
             name="payment"
@@ -205,7 +206,7 @@ const OrderPage = () => {
             onChange={(e) => setPaymentMethod(e.target.value)}
           />
           <label htmlFor="online-payment" className="text-gray-600">
-            Online Payment
+            Online Payment ( Currently unavailable.. )
           </label>
         </div>
 

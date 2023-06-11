@@ -16,6 +16,7 @@ import Cart from "./pages/Cart";
 import OrderPage from "./pages/OrderPage";
 import ViewOrders from "./pages/ViewOrders";
 import OrderProducts from "./pages/OrderProducts";
+import Contact from "./pages/Contact";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -49,6 +50,11 @@ const App = () => {
             exact
             path="/orders/:id"
             element={user ? <OrderProducts /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/contact"
+            element={user ? <Contact /> : <Navigate to="/login" />}
           />
 
           <Route

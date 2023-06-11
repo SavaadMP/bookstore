@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CartItem = ({ book, Quantity }) => {
   const { user } = useAuthContext();
@@ -37,7 +39,7 @@ const CartItem = ({ book, Quantity }) => {
       }
     );
 
-    const json = await response.json();
+    if (response.ok) toast.success("Item removed from cart");
   };
 
   return (
@@ -45,6 +47,7 @@ const CartItem = ({ book, Quantity }) => {
       key={book.CartItems._id}
       className="bg-white rounded-md p-4 shadow flex"
     >
+      <ToastContainer />
       {/* Product image */}
       <div className="aspect-w-3 aspect-h-2 mb-4 mr-5">
         <img

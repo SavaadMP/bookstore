@@ -15,20 +15,28 @@ const {
   getOrderedProducts,
   getOrderedDetails,
 } = require("../controllers/orderController");
+const { addMessage } = require("../controllers/messageController");
 
 const requireAuth = require("../middlewares/requireAuth");
 
+// * Registeration
+router.post("/login", loginUser);
+router.post("/register", registerUser);
+
+// * Cart
 router.get("/cart", requireAuth, displayCart);
 router.get("/cartCount", requireAuth, getCartCount);
 router.get("/getCartPrice", requireAuth, getCartPrice);
-router.get("/orders", requireAuth, getOrderedDetails);
-router.get("/orderedProducts/:id", requireAuth, getOrderedProducts);
-
-router.post("/login", loginUser);
-router.post("/register", registerUser);
 router.post("/addtocart/:id", requireAuth, addToCart);
 router.post("/changeQuantity", requireAuth, changeQuantity);
 router.post("/deleteCartItem/:id", requireAuth, deleteCartItem);
+
+// * Order
+router.get("/orders", requireAuth, getOrderedDetails);
+router.get("/orderedProducts/:id", requireAuth, getOrderedProducts);
 router.post("/placeOrder", requireAuth, placeOrder);
+
+// * Message Handler
+router.post("/message", requireAuth, addMessage);
 
 module.exports = router;
