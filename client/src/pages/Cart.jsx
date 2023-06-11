@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import EmptyCart from "../components/EmptyCart/EmptyCart";
 import CartItem from "../components/CartItem/CartItem";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -72,9 +73,12 @@ const Cart = () => {
 
               {/* Checkout button */}
               <div className="flex justify-end mt-8">
-                <button className="px-4 py-2 bg-indigo-700 hover:bg-indigo-600 text-white rounded-md focus:outline-none">
+                <Link
+                  to="/placeOrder"
+                  className="px-4 py-2 bg-indigo-700 hover:bg-indigo-600 text-white rounded-md focus:outline-none"
+                >
                   Proceed to Checkout
-                </button>
+                </Link>
               </div>
             </div>
           </div>

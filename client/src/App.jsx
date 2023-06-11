@@ -13,6 +13,9 @@ import Books from "./pages/admin/Books";
 import Footer from "./components/Footer/Footer";
 import EditProduct from "./pages/admin/EditProduct";
 import Cart from "./pages/Cart";
+import OrderPage from "./pages/OrderPage";
+import ViewOrders from "./pages/ViewOrders";
+import OrderProducts from "./pages/OrderProducts";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -32,6 +35,22 @@ const App = () => {
             path="/cart"
             element={user ? <Cart /> : <Navigate to="/login" />}
           />
+          <Route
+            exact
+            path="/placeOrder"
+            element={user ? <OrderPage /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/orders"
+            element={user ? <ViewOrders /> : <Navigate to="/login" />}
+          />
+          <Route
+            exact
+            path="/orders/:id"
+            element={user ? <OrderProducts /> : <Navigate to="/login" />}
+          />
+
           <Route
             path="/register"
             element={!user ? <Register /> : <Navigate to="/" />}

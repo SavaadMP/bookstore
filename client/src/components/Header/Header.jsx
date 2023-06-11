@@ -85,10 +85,10 @@ const Header = () => {
                         </Link>
 
                         <Link
-                          to="/"
+                          to="/orders"
                           className="text-black hover:text-indigo-700  px-3 py-2 rounded-md text-lg font-medium"
                         >
-                          Wishlist 💖
+                          Orders 📦
                         </Link>
 
                         <Link
@@ -185,10 +185,10 @@ const Header = () => {
               </Link>
 
               <Link
-                to="/"
+                to="/orders"
                 className="text-black hover:text-indigo-700  px-3 py-2 rounded-md text-lg font-medium"
               >
-                Wishlist 💖
+                Orders 📦
               </Link>
 
               <Link
