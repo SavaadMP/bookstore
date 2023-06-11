@@ -24,7 +24,6 @@ const CartItem = ({ book, Quantity }) => {
       return;
     }
     setCartCount(cartCount + count);
-    console.log(json);
   };
 
   const deleteCartItem = async (productID) => {
@@ -39,7 +38,6 @@ const CartItem = ({ book, Quantity }) => {
     );
 
     const json = await response.json();
-    console.log(json);
   };
 
   return (
