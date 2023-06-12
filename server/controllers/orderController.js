@@ -90,4 +90,50 @@ const getOrderedProducts = async (req, res) => {
   res.status(200).json(orderedItems);
 };
 
-module.exports = { placeOrder, getOrderedDetails, getOrderedProducts };
+const getDetailedOrderedDetails = async (req, res) => {
+  const orders = await Order.find({});
+
+  res.status(200).json(orders);
+};
+
+const getDetailedOrderedProducts = async (req, res) => {
+  const { id } = req.params;
+
+  let orderedItems = await Order.aggregate([
+    { $match: { _id: new mongoose.Types.ObjectId(id) } },
+    { $unwind: "$cartProducts" },
+    {
+      $project: {
+        item: "$cartProducts.item",
+        quantity: "$cartProducts.quantity",
+      },
+    },
+    {
+      $lookup: {
+        from: "books",
+        localField: "item",
+        foreignField: "_id",
+        as: "CartItems",
+      },
+    },
+    {
+      $project: {
+        item: 1,
+        quantity: 1,
+        CartItems: {
+          $arrayElemAt: ["$CartItems", 0],
+        },
+      },
+    },
+  ]).exec();
+
+  res.status(200).json(orderedItems);
+};
+
+module.exports = {
+  placeOrder,
+  getOrderedDetails,
+  getOrderedProducts,
+  getDetailedOrderedDetails,
+  getDetailedOrderedProducts,
+};

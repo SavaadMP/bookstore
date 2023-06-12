@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Message from "../../components/Messages/Message";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import Loader from "../../components/Loader/Loader";
 
 const Inbox = () => {
   const { user } = useAuthContext();

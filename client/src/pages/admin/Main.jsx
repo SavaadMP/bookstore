@@ -13,7 +13,7 @@ const Main = () => {
 
           <div className="flex">
             <AdminBtns text="View Messages 🧑‍🤝‍🧑" link="/admin/inbox" />
-            <AdminBtns text="View Orders 📦" link="/admin" />
+            <AdminBtns text="View Orders 📦" link="/admin/allOrders" />
           </div>
         </ul>
       </div>

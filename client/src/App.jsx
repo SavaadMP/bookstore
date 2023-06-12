@@ -18,6 +18,8 @@ import ViewOrders from "./pages/ViewOrders";
 import OrderProducts from "./pages/OrderProducts";
 import Contact from "./pages/Contact";
 import Inbox from "./pages/admin/Inbox";
+import AllOrders from "./pages/admin/AllOrders";
+import AdminOrderProducts from "./pages/admin/OrderProducts";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -92,6 +94,22 @@ const App = () => {
               <Route
                 path="/admin/inbox"
                 element={user.role == "admin" ? <Inbox /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/admin/allOrders"
+                element={
+                  user.role == "admin" ? <AllOrders /> : <Navigate to="/" />
+                }
+              />
+              <Route
+                path="/admin/viewOrderProduct/:id"
+                element={
+                  user.role == "admin" ? (
+                    <AdminOrderProducts />
+                  ) : (
+                    <Navigate to="/" />
+                  )
+                }
               />
             </>
           ) : null}

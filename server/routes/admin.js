@@ -12,6 +12,11 @@ const {
   getMessages,
   deleteMessage,
 } = require("../controllers/messageController");
+const {
+  getDetailedOrderedDetails,
+  getDetailedOrderedProducts,
+} = require("../controllers/orderController");
+
 const requireAuth = require("../middlewares/requireAuth");
 const requireAdminAuth = require("../middlewares/requireAdminAuth");
 
@@ -21,6 +26,8 @@ router.use(requireAuth);
 router.get("/books", getAllBooks);
 router.get("/book/:id", getSingleBook);
 router.get("/messages", requireAdminAuth, getMessages);
+router.get("/orders", requireAdminAuth, getDetailedOrderedDetails);
+router.get("/orderProducts/:id", requireAdminAuth, getDetailedOrderedProducts);
 
 router.post("/addbook", requireAdminAuth, createBook);
 
