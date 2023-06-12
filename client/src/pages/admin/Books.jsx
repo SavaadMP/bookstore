@@ -66,7 +66,7 @@ const Books = () => {
   return (
     <>
       {filteredBooks ? (
-        <div className="p-40">
+        <div className="py-40 px-16">
           <SearchBar text="Search Books.." searchHandle={searchHandle} />
 
           {books && books.length > 0 ? (
@@ -76,7 +76,7 @@ const Books = () => {
                   key={book._id}
                   className="border-b border-gray-200 mb-5 bg-white p-5 rounded-sm"
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center flex-col lg:flex-row">
                     <div className="flex-shrink-0">
                       <img
                         className="w-28"

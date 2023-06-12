@@ -25,7 +25,7 @@ const AllOrders = () => {
     }
   }, []);
   return (
-    <div className="p-40">
+    <div className="py-40 px-3 lg:px-32">
       <>
         <h1 className="text-xl mb-2">Your orders</h1>
         <div className="overflow-auto rounded-lg shadow">
