@@ -17,6 +17,7 @@ import OrderPage from "./pages/OrderPage";
 import ViewOrders from "./pages/ViewOrders";
 import OrderProducts from "./pages/OrderProducts";
 import Contact from "./pages/Contact";
+import Inbox from "./pages/admin/Inbox";
 
 const App = () => {
   const { user } = useAuthContext();
@@ -87,6 +88,10 @@ const App = () => {
                 element={
                   user.role == "admin" ? <EditProduct /> : <Navigate to="/" />
                 }
+              />
+              <Route
+                path="/admin/inbox"
+                element={user.role == "admin" ? <Inbox /> : <Navigate to="/" />}
               />
             </>
           ) : null}

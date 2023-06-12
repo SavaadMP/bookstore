@@ -31,7 +31,7 @@ const Contact = () => {
 
     if (response.ok) {
       toast.success("Message sent successfully");
-      sendMessage("");
+      setMessage("");
     }
   };
 

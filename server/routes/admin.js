@@ -8,6 +8,10 @@ const {
   getSingleBook,
   updateSingleBook,
 } = require("../controllers/bookController");
+const {
+  getMessages,
+  deleteMessage,
+} = require("../controllers/messageController");
 const requireAuth = require("../middlewares/requireAuth");
 const requireAdminAuth = require("../middlewares/requireAdminAuth");
 
@@ -16,10 +20,12 @@ router.use(requireAuth);
 
 router.get("/books", getAllBooks);
 router.get("/book/:id", getSingleBook);
+router.get("/messages", requireAdminAuth, getMessages);
 
 router.post("/addbook", requireAdminAuth, createBook);
 
 router.delete("/deletebook/:id", requireAdminAuth, deleteBook);
+router.delete("/deleteMessage/:id", requireAdminAuth, deleteMessage);
 
 router.patch("/editbook/:id", updateSingleBook);
 
