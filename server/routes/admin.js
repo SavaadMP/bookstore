@@ -15,6 +15,7 @@ const {
 const {
   getDetailedOrderedDetails,
   getDetailedOrderedProducts,
+  updateStatus,
 } = require("../controllers/orderController");
 
 const requireAuth = require("../middlewares/requireAuth");
@@ -30,6 +31,7 @@ router.get("/orders", requireAdminAuth, getDetailedOrderedDetails);
 router.get("/orderProducts/:id", requireAdminAuth, getDetailedOrderedProducts);
 
 router.post("/addbook", requireAdminAuth, createBook);
+router.post("/updateStatus/:id", requireAdminAuth, updateStatus);
 
 router.delete("/deletebook/:id", requireAdminAuth, deleteBook);
 router.delete("/deleteMessage/:id", requireAdminAuth, deleteMessage);

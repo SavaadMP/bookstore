@@ -25,9 +25,9 @@ const TableBody = ({ order }) => {
       <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
         <span
           className={`p-1.5 ${
-            order.status === "Pending"
-              ? "text-yellow-800  bg-yellow-200"
-              : " text-green-800  bg-green-200"
+            order.status === "completed"
+              ? "text-green-800  bg-green-200"
+              : "  text-yellow-800  bg-yellow-200"
           } text-xs font-medium uppercase tracking-wider  rounded-lg bg-opacity-50`}
         >
           {order.status}

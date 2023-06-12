@@ -1,11 +1,41 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const AdminOrderTable = ({ order }) => {
-  const changeStatus = () => {
+  const { user } = useAuthContext();
+
+  const changeStatus = async () => {
     var status = prompt("Change Status");
+
     console.log(status);
+
+    if (!status == "") {
+      console.log("ok");
+      if (!user) return;
+
+      const response = await fetch(
+        "http://localhost:2200/api/admin/updateStatus/" + order._id,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            status: status,
+          }),
+        }
+      );
+
+      const json = await response.json();
+      console.log(json);
+
+      if (response.ok) {
+        window.location.reload();
+      }
+    }
   };
 
   return (
@@ -37,7 +67,11 @@ const AdminOrderTable = ({ order }) => {
       <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
         <span
           onClick={changeStatus}
-          className={`p-1.5  text-green-800  bg-green-200 text-xs font-medium uppercase tracking-wider  rounded-lg bg-opacity-50`}
+          className={`p-1.5 ${
+            order.status === "completed"
+              ? " text-green-800  bg-green-200"
+              : "text-yellow-800  bg-yellow-200"
+          } cursor-pointer text-xs font-medium uppercase tracking-wider  rounded-lg bg-opacity-50`}
         >
           {order.status}
         </span>

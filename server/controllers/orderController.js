@@ -130,10 +130,30 @@ const getDetailedOrderedProducts = async (req, res) => {
   res.status(200).json(orderedItems);
 };
 
+const updateStatus = async (req, res) => {
+  console.log(req.params.id, req.body);
+
+  try {
+    const updatedOrder = await Order.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          status: req.body.status,
+        },
+      }
+    );
+
+    res.status(200).json(updatedOrder);
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+};
+
 module.exports = {
   placeOrder,
   getOrderedDetails,
   getOrderedProducts,
   getDetailedOrderedDetails,
   getDetailedOrderedProducts,
+  updateStatus,
 };
