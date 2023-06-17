@@ -10,15 +10,18 @@ export const useSignup = () => {
   const navigate = useNavigate();
 
   const Signup = async (username, email, password) => {
-    const response = await fetch("http://localhost:2200/api/user/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-      }),
-    });
+    const response = await fetch(
+      "https://bookstore-phi.vercel.app/api/user/register",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+        }),
+      }
+    );
 
     const json = await response.json();
     if (!response.ok) {

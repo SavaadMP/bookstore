@@ -10,14 +10,17 @@ export const useLogin = () => {
   const navigate = useNavigate();
 
   const login = async (email, password) => {
-    const response = await fetch("http://localhost:2200/api/user/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    const response = await fetch(
+      "https://bookstore-phi.vercel.app/api/user/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    );
 
     const json = await response.json();
     if (!response.ok) {

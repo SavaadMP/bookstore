@@ -9,7 +9,7 @@ const CartItem = ({ book, Quantity }) => {
 
   const changeQuantity = async (productID, count) => {
     const response = await fetch(
-      "http://localhost:2200/api/user/changeQuantity",
+      "https://bookstore-phi.vercel.app/api/user/changeQuantity",
       {
         method: "POST",
         headers: {
@@ -30,7 +30,7 @@ const CartItem = ({ book, Quantity }) => {
 
   const deleteCartItem = async (productID) => {
     const response = await fetch(
-      "http://localhost:2200/api/user/deleteCartItem/" + productID,
+      "https://bookstore-phi.vercel.app/api/user/deleteCartItem/" + productID,
       {
         method: "POST",
         headers: {

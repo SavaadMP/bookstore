@@ -10,7 +10,7 @@ const Message = ({ message }) => {
     console.log(message._id);
 
     const response = await fetch(
-      "http://localhost:2200/api/admin/deleteMessage/" + message._id,
+      "https://bookstore-phi.vercel.app/api/admin/deleteMessage/" + message._id,
       {
         method: "DELETE",
         headers: {

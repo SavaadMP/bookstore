@@ -11,7 +11,7 @@ const OrderProducts = () => {
     const fetchOrderedProducts = async () => {
       if (!user) return;
       const response = await fetch(
-        "http://localhost:2200/api/user/orderedProducts/" + id,
+        "https://bookstore-phi.vercel.app/api/user/orderedProducts/" + id,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

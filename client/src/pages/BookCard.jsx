@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Popup from "../components/PopUp/PopUp";
 import AddToCart from "../components/AddToCart/AddToCart";
+import Loader from "../components/Loader/Loader";
 
 const BookCard = ({ book }) => {
   const [showPopUp, setShowPopUp] = useState(false);

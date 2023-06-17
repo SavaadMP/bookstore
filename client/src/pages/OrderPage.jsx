@@ -19,7 +19,7 @@ const OrderPage = () => {
   useEffect(() => {
     const getCartPrice = async () => {
       const response = await fetch(
-        "http://localhost:2200/api/user/getCartPrice",
+        "https://bookstore-phi.vercel.app/api/user/getCartPrice",
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -50,14 +50,17 @@ const OrderPage = () => {
       paymentMethod,
       cartPrice,
     };
-    const response = await fetch("http://localhost:2200/api/user/placeOrder", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(
+      "https://bookstore-phi.vercel.app/api/user/placeOrder",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(body),
+      }
+    );
 
     const json = await response.json();
 

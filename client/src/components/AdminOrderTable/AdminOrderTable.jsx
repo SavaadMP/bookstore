@@ -16,7 +16,7 @@ const AdminOrderTable = ({ order }) => {
       if (!user) return;
 
       const response = await fetch(
-        "http://localhost:2200/api/admin/updateStatus/" + order._id,
+        "https://bookstore-phi.vercel.app/api/admin/updateStatus/" + order._id,
         {
           method: "POST",
           headers: {

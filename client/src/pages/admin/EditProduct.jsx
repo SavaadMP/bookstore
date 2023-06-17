@@ -20,7 +20,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       const response = await fetch(
-        "http://localhost:2200/api/admin/book/" + id,
+        "https://bookstore-phi.vercel.app/api/admin/book/" + id,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -49,7 +49,7 @@ const EditProduct = () => {
 
     const book = { title, description, price, author, imageURL };
     const response = await fetch(
-      "http://localhost:2200/api/admin/editbook/" + id,
+      "https://bookstore-phi.vercel.app/api/admin/editbook/" + id,
       {
         method: "PATCH",
         headers: {

@@ -25,14 +25,17 @@ const AddProduct = () => {
     }
 
     const book = { title, description, price, author, imageURL };
-    const response = await fetch("http://localhost:2200/api/admin/addBook", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-      body: JSON.stringify(book),
-    });
+    const response = await fetch(
+      "https://bookstore-phi.vercel.app/api/admin/addBook",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(book),
+      }
+    );
 
     const json = await response.json();
 

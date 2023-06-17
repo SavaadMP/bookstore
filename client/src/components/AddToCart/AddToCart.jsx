@@ -12,7 +12,7 @@ const AddToCart = ({ bookID }) => {
     if (!user) return alert("You should login first!!");
 
     const response = await fetch(
-      "http://localhost:2200/api/user/addtocart/" + bookID,
+      "https://bookstore-phi.vercel.app/api/user/addtocart/" + bookID,
       {
         method: "POST",
         headers: {

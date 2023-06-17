@@ -11,11 +11,14 @@ const Cart = () => {
 
   useEffect(() => {
     const fetchCartItems = async () => {
-      const response = await fetch("http://localhost:2200/api/user/cart", {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const response = await fetch(
+        "https://bookstore-phi.vercel.app/api/user/cart",
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
 
       const json = await response.json();
       setCartItems([json][0]);
@@ -23,7 +26,7 @@ const Cart = () => {
 
     const getCartPrice = async () => {
       const response = await fetch(
-        "http://localhost:2200/api/user/getCartPrice",
+        "https://bookstore-phi.vercel.app/api/user/getCartPrice",
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

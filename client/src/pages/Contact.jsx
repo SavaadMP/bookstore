@@ -20,14 +20,17 @@ const Contact = () => {
     e.preventDefault();
     const body = { name, email, message };
 
-    const response = await fetch("http://localhost:2200/api/user/message", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(
+      "https://bookstore-phi.vercel.app/api/user/message",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(body),
+      }
+    );
 
     if (response.ok) {
       toast.success("Message sent successfully");

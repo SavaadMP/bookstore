@@ -12,11 +12,14 @@ const Home = () => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await fetch("http://localhost:2200/api/admin/books", {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const response = await fetch(
+        "https://bookstore-phi.vercel.app/api/admin/books",
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       const json = await response.json();
 
       if (response.ok) {
