@@ -7,7 +7,7 @@ import Header from "./components/Header/Header";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import AddProduct from "./pages/admin/addProduct";
+import AddProduct from "./pages/admin/AddProduct";
 import Main from "./pages/admin/Main";
 import Books from "./pages/admin/Books";
 import Footer from "./components/Footer/Footer";
