@@ -30,32 +30,27 @@ const App = () => {
         <Header />
         <Routes>
           <Route
-            exact
+            index
             path="/"
             element={user ? <Home /> : <Navigate to="/login" />}
           />
           <Route
-            exact
             path="/cart"
             element={user ? <Cart /> : <Navigate to="/login" />}
           />
           <Route
-            exact
             path="/placeOrder"
             element={user ? <OrderPage /> : <Navigate to="/login" />}
           />
           <Route
-            exact
             path="/orders"
             element={user ? <ViewOrders /> : <Navigate to="/login" />}
           />
           <Route
-            exact
             path="/orders/:id"
             element={user ? <OrderProducts /> : <Navigate to="/login" />}
           />
           <Route
-            exact
             path="/contact"
             element={user ? <Contact /> : <Navigate to="/login" />}
           />
